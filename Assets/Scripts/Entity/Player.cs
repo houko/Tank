@@ -29,14 +29,13 @@ public class Player : MonoBehaviour
     /*护盾时间*/
     private float protectTimeVal;
 
-    private Vector3 bornVector3;
 
     private void Awake()
     {
         moveSpeed = 5;
         protectTimeVal = 2f;
-        bornVector3 = new Vector3(18, -7, 0);
     }
+
 
     private void FixedUpdate()
     {
@@ -93,13 +92,13 @@ public class Player : MonoBehaviour
 
 
         var tank = Resources.Load<GameObject>(GameConst.PlayerPrefab);
-        Instantiate(tank, bornVector3, transform.rotation);
+        Instantiate(tank, GameConst.PlayerBornVector3, transform.rotation);
         isProtected = true;
         protectTimeVal = 2f;
         tank.transform.Find("Shield").gameObject.SetActive(true);
 
         var relive = Resources.Load<GameObject>(GameConst.ShieldPrefab);
-        Instantiate(relive, bornVector3, transform.rotation);
+        Instantiate(relive, GameConst.PlayerBornVector3, transform.rotation);
     }
 
     private void Move()
@@ -111,7 +110,7 @@ public class Player : MonoBehaviour
         v = Input.GetAxis("Vertical");
 
         // 沿x移动
-        transform.Translate(Vector3.right * h * moveSpeed * Time.deltaTime, Space.World);
+        transform.Translate(Vector3.right * h * moveSpeed * Time.fixedDeltaTime, Space.World);
 
         // 往右
         if (h < 0)
@@ -133,7 +132,7 @@ public class Player : MonoBehaviour
         }
 
         // 沿y移动
-        transform.Translate(Vector3.up * v * moveSpeed * Time.deltaTime, Space.World);
+        transform.Translate(Vector3.up * v * moveSpeed * Time.fixedDeltaTime, Space.World);
 
         // 往下
         if (v < 0)

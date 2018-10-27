@@ -24,19 +24,14 @@ public class GameSceneManager : MonoBehaviour
     private void InitMap()
     {
         CreateHome();
-        CreatePlayer();
-        CreateEnemy();
+        CreatePlayerAndEnemy();
         CreateRandomMap();
     }
 
 
-    private void CreatePlayer()
+    private void CreatePlayerAndEnemy()
     {
         MapFactory.CreateMapItem(GameConst.BornPrefab, GameConst.PlayerBornVector3, transform);
-    }
-
-    private void CreateEnemy()
-    {
     }
 
 

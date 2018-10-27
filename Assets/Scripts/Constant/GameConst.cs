@@ -14,12 +14,13 @@ public class GameConst
 
     public static readonly Vector3[] EnemyBornPosList = new[]
     {
-        new Vector3(10, 9, 0),
-        new Vector3(5, 9, 0),
-        new Vector3(0, 9, 0)
+        new Vector3(-10, 9, 0),
+        new Vector3(0, 9, 0),
+        new Vector3(10, 9, 0)
     };
 
 
+    // 地图对象
     public const string HomePrefab = "Prefabs/Map/Home";
     public const string DieHomePrefab = "Prefabs/Map/DieHome";
     public const string WallPrefab = "Prefabs/Map/Wall";
@@ -27,13 +28,13 @@ public class GameConst
     public const string BarrierPrefab = "Prefabs/Map/Barrier";
     public const string GrassPrefab = "Prefabs/Map/Grass";
 
-
+    
+    //玩家和敌人
     public const string PlayerPrefab = "Prefabs/Tank/Player";
     public const string EnemyPrefab = "Prefabs/Tank/Enemy";
-
     public const string BulletPrefab = "Prefabs/Tank/Bullet";
 
-
+    // 特效
     public const string BornPrefab = "Prefabs/Effect/Born";
     public const string ShieldPrefab = "Prefabs/Effect/Shield";
     public const string ExplodePrefab = "Prefabs/Effect/Explode";

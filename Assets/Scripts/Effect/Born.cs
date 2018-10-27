@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 /**
 *  作   者 ：胡朋
@@ -13,7 +12,7 @@ public class Born : MonoBehaviour
 
     private int maxEnemyCount;
 
-    private int currentEnemyCount;
+    private static int currentEnemyCount;
 
 
     private void Awake()
@@ -30,7 +29,7 @@ public class Born : MonoBehaviour
     private void Start()
     {
         Invoke("BornTank", 1f);
-        Invoke("BornEnemy", 1f);
+        InvokeRepeating("BornEnemy", 1f, 5f);
         Destroy(gameObject, 1f);
     }
 
