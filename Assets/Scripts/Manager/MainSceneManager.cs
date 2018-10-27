@@ -19,6 +19,9 @@ public class MainSceneManager : MonoBehaviour
         pos2 = transform.Find("Pos2");
     }
 
+    /// <summary>
+    /// 缓慢移到频幕中间
+    /// </summary>
     private void Start()
     {
         transform.DOMoveY(200, 3f);
@@ -54,7 +57,7 @@ public class MainSceneManager : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Space) | Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene("Game");
             GameConst.isSingle = isSingle;
