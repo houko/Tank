@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +17,11 @@ public class MainSceneManager : MonoBehaviour
     {
         pos1 = transform.Find("Pos1");
         pos2 = transform.Find("Pos2");
+    }
+
+    private void Start()
+    {
+        transform.DOMoveY(200, 3f);
     }
 
     private void Update()

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useSafeMode: 1
   timeScale: 1
-  useSmoothDeltaTime: 0
+  useSmoothDeltaTime: 1
   maxSmoothUnscaledTime: 0.15
   rewindCallbackMode: 0
   showUnityEditorReport: 0
