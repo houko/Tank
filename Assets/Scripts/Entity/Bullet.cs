@@ -31,6 +31,11 @@ public class Bullet : MonoBehaviour
                 Destroy(other.gameObject);
                 break;
             case GameObjectTag.Barrier:
+                if (isPlayerBullet)
+                {
+                    other.SendMessage("PlayerAudio");
+                }
+
                 Destroy(gameObject);
                 break;
             case GameObjectTag.Tank:

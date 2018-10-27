@@ -31,6 +31,14 @@ public class Player : MonoBehaviour
 
     private GameObject player;
 
+    private AudioSource tankAudio;
+
+
+    private void Awake()
+    {
+        tankAudio = GetComponent<AudioSource>();
+    }
+
     private void Update()
     {
         if (GameContext.isGameOver)
@@ -146,8 +154,17 @@ public class Player : MonoBehaviour
 
         if (Math.Abs(h) > 0)
         {
+//            AudioClip audioClip = Resources.Load<AudioClip>(GameConst.DrivingAudio);
+//            tankAudio.Stop();
+//            tankAudio.clip = audioClip;
+//            if (!tankAudio.isPlaying)
+//            {
+//                AudioSource.PlayClipAtPoint(audioClip, transform.position);
+//            }
+
             return;
         }
+
 
         // 沿y移动
         transform.Translate(Vector3.up * v * moveSpeed * Time.fixedDeltaTime, Space.World);
@@ -165,8 +182,5 @@ public class Player : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, 0);
             bulletEulerAngles = new Vector3(0, 0, 0);
         }
-
-        AudioClip audioClip = Resources.Load<AudioClip>(GameConst.DrivingAudio);
-        AudioSource.PlayClipAtPoint(audioClip, transform.position);
     }
 }
