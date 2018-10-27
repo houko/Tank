@@ -24,7 +24,7 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        transform.DOMoveY(200, 3f);
+        transform.DOMoveY(300, 3f);
     }
 
     private void Update()
