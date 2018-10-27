@@ -9,13 +9,13 @@ public class UIManager : MonoBehaviour
 
     private Text textHp;
 
-    private Image gameOver;
+    private GameObject gameOver;
 
     private void Awake()
     {
         textScore = GameObject.Find("ScoreText").GetComponent<Text>();
         textHp = GameObject.Find("HpText").GetComponent<Text>();
-//        gameOver = GameObject.Find("Image").GetComponent<Image>();
+        gameOver = transform.Find("Image").gameObject;
     }
 
 
@@ -27,8 +27,8 @@ public class UIManager : MonoBehaviour
 
         if (GameContext.isGameOver)
         {
-//            gameOver.GetComponent<Renderer>().enabled = true;
-            Invoke("ReturnToMain", 3f);
+            gameOver.SetActive(true);
+            Invoke("ReturnToMain", 5f);
         }
     }
 
