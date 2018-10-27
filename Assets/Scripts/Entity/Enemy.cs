@@ -24,8 +24,6 @@ public class Enemy : MonoBehaviour
     /*每隔多久改变方向*/
     private const float changeDirTime = 4f;
 
-    public static int score;
-
     private void FixedUpdate()
     {
         Move();
@@ -56,7 +54,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
 
         // 添加得分
-        score += 1;
+        GameContext.score += 1;
         // 爆炸效果
         GameObject go = Resources.Load<GameObject>(GameConst.ExplodePrefab);
         Instantiate(go, transform.position, Quaternion.identity);

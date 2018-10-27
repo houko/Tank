@@ -31,17 +31,24 @@ public class Player : MonoBehaviour
 
     private GameObject player;
 
-    /*玩家血量*/
-    public static int hp = 3;
-
     private void Update()
     {
+        if (GameContext.isGameOver)
+        {
+            return;
+        }
+
         Attack();
         CheckShield();
     }
 
     private void FixedUpdate()
     {
+        if (GameContext.isGameOver)
+        {
+            return;
+        }
+
         Move();
     }
 
@@ -92,12 +99,14 @@ public class Player : MonoBehaviour
         // 爆炸
         var go = Resources.Load<GameObject>(GameConst.ExplodePrefab);
         Instantiate(go, transform.position, transform.rotation);
-        hp -= 1;
-        Debug.Log("hp is " + hp);
+        GameContext.playerHp -= 1;
+        Debug.Log("hp is " + GameContext.playerHp);
 
-        if (hp == 0)
+        if (GameContext.playerHp == 0)
         {
+            GameContext.isGameOver = true;
             Debug.Log("game over");
+            return;
         }
 
         // 重生

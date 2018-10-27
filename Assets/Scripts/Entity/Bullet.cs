@@ -59,7 +59,7 @@ public class Bullet : MonoBehaviour
 
                 var explode = Resources.Load<GameObject>(GameConst.ExplodePrefab);
                 Instantiate(explode, other.transform.position, Quaternion.identity);
-
+                GameContext.isGameOver = true;
                 break;
         }
     }

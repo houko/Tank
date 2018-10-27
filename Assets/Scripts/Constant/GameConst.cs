@@ -12,7 +12,7 @@ public class GameConst
     public static Vector3 HomeVector3 = new Vector3(0, -8, 0);
     public static Vector3 PlayerBornVector3 = new Vector3(-2, -8, 0);
 
-    public static readonly Vector3[] EnemyBornPosList = new[]
+    public static readonly Vector3[] EnemyBornPosList =
     {
         new Vector3(-10, 9, 0),
         new Vector3(0, 9, 0),
@@ -28,7 +28,7 @@ public class GameConst
     public const string BarrierPrefab = "Prefabs/Map/Barrier";
     public const string GrassPrefab = "Prefabs/Map/Grass";
 
-    
+
     //玩家和敌人
     public const string PlayerPrefab = "Prefabs/Tank/Player";
     public const string EnemyPrefab = "Prefabs/Tank/Enemy";
