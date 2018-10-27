@@ -165,5 +165,8 @@ public class Player : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, 0);
             bulletEulerAngles = new Vector3(0, 0, 0);
         }
+
+        AudioClip audioClip = Resources.Load<AudioClip>(GameConst.DrivingAudio);
+        AudioSource.PlayClipAtPoint(audioClip, transform.position);
     }
 }
