@@ -40,3 +40,6 @@ player2（开发中）:
 - 不同敌人攻击力不同
 - 带特效的敌人打死奖励道具
 - 道具生效及搭配UI
+
+## 5. license
+[license](LICENSE)
