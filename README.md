@@ -32,7 +32,7 @@ player2（开发中）:
 
 
 ## 3. 视频效果
-[bilibili视频站](1)
+[bilibili视频站](https://www.bilibili.com/video/av34756631/)
 
 ## 4. 后续计划
 - 双人模式
