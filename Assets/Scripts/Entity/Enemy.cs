@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
-    public float moveSpeed;
+    public float moveSpeed = 3;
 
     /*垂直方向*/
     public float h;
@@ -24,11 +24,7 @@ public class Enemy : MonoBehaviour
     /*每隔多久改变方向*/
     private const float changeDirTime = 4f;
 
-    private void Awake()
-    {
-        moveSpeed = 3;
-    }
-
+    public static int score;
 
     private void FixedUpdate()
     {
@@ -43,7 +39,7 @@ public class Enemy : MonoBehaviour
 
         if (bulletCoolTime >= 3f)
         {
-            GameObject go = Resources.Load<GameObject>(GameConst.BulletPrefab);
+            GameObject go = Resources.Load<GameObject>(GameConst.EnemyBulletPrefab);
             Instantiate(go, transform.position, Quaternion.Euler(bulletEulerAngles));
             bulletCoolTime = 0f;
         }
@@ -54,27 +50,18 @@ public class Enemy : MonoBehaviour
     /// 死
     /// 1. 销毁
     /// 2. 爆炸效果，0
-    /// 3. 在出生地重新实例化
-    /// 4. 播放重生效果
     /// </summary>
-//    private void Die()
-//    {
-//  
-//        Destroy(gameObject);
-//
-//        var go = Resources.Load<GameObject>(GameConst.ExplodePrefab);
-//        Instantiate(go, transform.position, transform.rotation);
-//
-//
-//        var tank = Resources.Load<GameObject>(GameConst.PlayerPrefab);
-//        Instantiate(tank, bornVector3, transform.rotation);
-//        isProtected = true;
-//        protectTimeVal = 2f;
-//        tank.transform.Find("Shield").gameObject.SetActive(true);
-//
-//        var relive = Resources.Load<GameObject>(GameConst.ShieldPrefab);
-//        Instantiate(relive, bornVector3, transform.rotation);
-//    }
+    private void Die()
+    {
+        Destroy(gameObject);
+
+        // 添加得分
+        score += 1;
+        // 爆炸效果
+        GameObject go = Resources.Load<GameObject>(GameConst.ExplodePrefab);
+        Instantiate(go, transform.position, Quaternion.identity);
+    }
+
     private void Move()
     {
         // 转向
@@ -101,6 +88,7 @@ public class Enemy : MonoBehaviour
                 h = 1;
                 v = 0;
             }
+
             changeDirTimeVal = 0;
             Debug.Log("敌人改变方向");
         }

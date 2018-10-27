@@ -9,7 +9,7 @@ using UnityEngine;
  */
 public class Player : MonoBehaviour
 {
-    public float moveSpeed;
+    public float moveSpeed = 3;
 
     /*垂直方向*/
     public float h;
@@ -27,21 +27,22 @@ public class Player : MonoBehaviour
     private bool isProtected;
 
     /*护盾时间*/
-    private float protectTimeVal;
+    private float protectTimeVal = 3;
 
+    private GameObject player;
 
-    private void Awake()
+    /*玩家血量*/
+    public static int hp = 3;
+
+    private void Update()
     {
-        moveSpeed = 5;
-        protectTimeVal = 2f;
+        Attack();
+        CheckShield();
     }
-
 
     private void FixedUpdate()
     {
         Move();
-        Attack();
-        CheckShield();
     }
 
 
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
             if (protectTimeVal <= 0)
             {
                 isProtected = false;
+                player.transform.Find("Shield").gameObject.SetActive(false);
             }
         }
     }
@@ -64,7 +66,7 @@ public class Player : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.Space) | Input.GetKeyDown(KeyCode.J)) && bulletCoolTime >= 0.5f)
         {
-            GameObject go = Resources.Load<GameObject>(GameConst.BulletPrefab);
+            GameObject go = Resources.Load<GameObject>(GameConst.PlayerBulletPrefab);
             Instantiate(go, transform.position, Quaternion.Euler(bulletEulerAngles));
             bulletCoolTime = 0f;
         }
@@ -87,18 +89,25 @@ public class Player : MonoBehaviour
 
         Destroy(gameObject);
 
+        // 爆炸
         var go = Resources.Load<GameObject>(GameConst.ExplodePrefab);
         Instantiate(go, transform.position, transform.rotation);
+        hp -= 1;
+        Debug.Log("hp is " + hp);
 
+        if (hp == 0)
+        {
+            Debug.Log("game over");
+        }
 
-        var tank = Resources.Load<GameObject>(GameConst.PlayerPrefab);
-        Instantiate(tank, GameConst.PlayerBornVector3, transform.rotation);
+        // 重生
+        player = Resources.Load<GameObject>(GameConst.PlayerPrefab);
+        Instantiate(player, GameConst.PlayerBornVector3, transform.rotation);
         isProtected = true;
-        protectTimeVal = 2f;
-        tank.transform.Find("Shield").gameObject.SetActive(true);
+        protectTimeVal = 3f;
 
-        var relive = Resources.Load<GameObject>(GameConst.ShieldPrefab);
-        Instantiate(relive, GameConst.PlayerBornVector3, transform.rotation);
+        // 魔法盾标识
+        player.transform.Find("Shield").gameObject.SetActive(true);
     }
 
     private void Move()

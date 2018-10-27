@@ -7,7 +7,6 @@ public class MainSceneManager : MonoBehaviour
     /*默认单人*/
     private bool isSingle = true;
 
-
     private Transform pos1;
 
     private Transform pos2;

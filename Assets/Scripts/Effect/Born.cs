@@ -8,20 +8,6 @@
 */
 public class Born : MonoBehaviour
 {
-    private Object[] enemyList;
-
-    private int maxEnemyCount;
-
-    private static int currentEnemyCount;
-
-
-    private void Awake()
-    {
-        enemyList = Resources.LoadAll(GameConst.EnemyPrefab, typeof(GameObject));
-        maxEnemyCount = 5;
-    }
-
-
     /// <summary>
     /// 延时加载
     /// 延时销毁
@@ -29,8 +15,7 @@ public class Born : MonoBehaviour
     private void Start()
     {
         Invoke("BornTank", 1f);
-        InvokeRepeating("BornEnemy", 1f, 5f);
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 3f);
     }
 
     /// <summary>
@@ -40,16 +25,5 @@ public class Born : MonoBehaviour
     {
         var Born = Resources.Load<GameObject>(GameConst.PlayerPrefab);
         Instantiate(Born, transform.position, Quaternion.identity);
-    }
-
-    private void BornEnemy()
-    {
-        if (currentEnemyCount < maxEnemyCount)
-        {
-            int index = Random.Range(0, enemyList.Length);
-            Vector3 pos = GameConst.EnemyBornPosList[Random.Range(0, GameConst.EnemyBornPosList.Length)];
-            Instantiate(enemyList[index], pos, Quaternion.identity);
-            currentEnemyCount++;
-        }
     }
 }

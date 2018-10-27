@@ -32,7 +32,8 @@ public class GameConst
     //玩家和敌人
     public const string PlayerPrefab = "Prefabs/Tank/Player";
     public const string EnemyPrefab = "Prefabs/Tank/Enemy";
-    public const string BulletPrefab = "Prefabs/Tank/Bullet";
+    public const string PlayerBulletPrefab = "Prefabs/Tank/PlayerBullet";
+    public const string EnemyBulletPrefab = "Prefabs/Tank/EnemyBullet";
 
     // 特效
     public const string BornPrefab = "Prefabs/Effect/Born";

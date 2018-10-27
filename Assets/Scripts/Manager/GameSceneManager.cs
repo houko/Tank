@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 /**
 *  作   者 ：胡朋
@@ -7,14 +8,25 @@
 */
 public class GameSceneManager : MonoBehaviour
 {
-    // Use this for initialization
-    void Start()
+    private Object[] enemyList;
+
+    private int maxEnemyCount;
+
+    private static int currentEnemyCount;
+
+    private void Awake()
+    {
+        enemyList = Resources.LoadAll(GameConst.EnemyPrefab, typeof(GameObject));
+        maxEnemyCount = 5;
+    }
+
+    private void Start()
     {
         Debug.Log(GameConst.isSingle);
         InitMap();
     }
 
-
+ 
     /// <summary>
     /// 1. 创建老家
     /// 2. 创建随机地图
@@ -24,14 +36,26 @@ public class GameSceneManager : MonoBehaviour
     private void InitMap()
     {
         CreateHome();
-        CreatePlayerAndEnemy();
+        CreatePlayer();
+        InvokeRepeating("CreateEnemy", 3f, 5f);
         CreateRandomMap();
     }
 
 
-    private void CreatePlayerAndEnemy()
+    private void CreatePlayer()
     {
         MapFactory.CreateMapItem(GameConst.BornPrefab, GameConst.PlayerBornVector3, transform);
+    }
+
+    private void CreateEnemy()
+    {
+        if (currentEnemyCount < maxEnemyCount)
+        {
+            int index = Random.Range(0, enemyList.Length);
+            Vector3 pos = GameConst.EnemyBornPosList[Random.Range(0, GameConst.EnemyBornPosList.Length)];
+            Instantiate(enemyList[index], pos, Quaternion.identity);
+            currentEnemyCount++;
+        }
     }
 
 

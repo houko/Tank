@@ -36,13 +36,20 @@ public class Bullet : MonoBehaviour
             case GameObjectTag.Tank:
                 if (!isPlayerBullet)
                 {
-                    // 给player发消息，调用die方法
+                    // 敌人打玩家
                     other.SendMessage("Die");
-                    break;
+                    Destroy(gameObject);
                 }
 
                 break;
             case GameObjectTag.Enemy:
+                if (isPlayerBullet)
+                {
+                    // 玩家打敌人
+                    other.SendMessage("Die");
+                    Destroy(gameObject);
+                }
+
                 break;
             case GameObjectTag.Home:
                 Destroy(gameObject);
