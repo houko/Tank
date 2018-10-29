@@ -20,12 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4703469718824790}
   - component: {fileID: 212855683202463400}
-  - component: {fileID: 114051397277236304}
   - component: {fileID: 61468823928300004}
   - component: {fileID: 50776357581273120}
   - component: {fileID: 82171651943365422}
+  - component: {fileID: 114625243849023846}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player2
   m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -233,7 +233,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114051397277236304
+--- !u!114 &114625243849023846
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,10 +241,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1165824878100412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7949014158dfc4ecebbf6747a0beb463, type: 3}
+  m_Script: {fileID: 11500000, guid: fa66117dd392499cb788caea861be6e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 3
   h: 0
   v: 0
 --- !u!212 &212219002116228608

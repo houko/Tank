@@ -7,9 +7,6 @@
 */
 public class GameConst
 {
-    /*是否是单人游戏*/
-    public static bool isSingle = true;
-
     /*场上最大敌人数量*/
     public static readonly int maxEnemyCount = 5;
 
@@ -17,7 +14,8 @@ public class GameConst
     public static Vector3 HomeVector3 = new Vector3(0, -8, 0);
 
     /*玩家出生点坐标*/
-    public static Vector3 PlayerBornVector3 = new Vector3(-2, -8, 0);
+    public static Vector3 Player1BornVector3 = new Vector3(-2, -8, 0);
+    public static Vector3 Player2BornVector3 = new Vector3(2, -8, 0);
 
     /*敌人出生点坐标*/
     public static readonly Vector3[] EnemyBornPosList =
@@ -38,13 +36,15 @@ public class GameConst
 
 
     //玩家和敌人
-    public const string PlayerPrefab = "Prefabs/Tank/Player";
+    public const string Player1Prefab = "Prefabs/Tank/Player1";
+    public const string Player2Prefab = "Prefabs/Tank/Player2";
     public const string EnemyPrefab = "Prefabs/Tank/Enemy";
     public const string PlayerBulletPrefab = "Prefabs/Tank/PlayerBullet";
     public const string EnemyBulletPrefab = "Prefabs/Tank/EnemyBullet";
 
     // 特效
-    public const string BornPrefab = "Prefabs/Effect/Born";
+    public const string BornPrefab1 = "Prefabs/Effect/Born1";
+    public const string BornPrefab2 = "Prefabs/Effect/Born2";
     public const string ShieldPrefab = "Prefabs/Effect/Shield";
     public const string ExplodePrefab = "Prefabs/Effect/Explode";
 

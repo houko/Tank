@@ -18,7 +18,6 @@ public class GameSceneManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(GameConst.isSingle);
         InitMap();
     }
 
@@ -32,15 +31,26 @@ public class GameSceneManager : MonoBehaviour
     private void InitMap()
     {
         CreateHome();
-        CreatePlayer();
+        CreatePlayer1();
+        if (!GameContext.isSingle)
+        {
+            CreatePlayer2();
+        }
+
         InvokeRepeating("CreateEnemy", 2f, 5f);
         CreateRandomMap();
     }
 
 
-    private void CreatePlayer()
+    private void CreatePlayer1()
     {
-        MapFactory.CreateMapItem(GameConst.BornPrefab, GameConst.PlayerBornVector3, transform);
+        MapFactory.CreateMapItem(GameConst.BornPrefab1, GameConst.Player1BornVector3, transform);
+    }
+
+
+    private void CreatePlayer2()
+    {
+        MapFactory.CreateMapItem(GameConst.BornPrefab2, GameConst.Player2BornVector3, transform);
     }
 
     private void CreateEnemy()

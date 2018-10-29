@@ -7,7 +7,7 @@ using UnityEngine;
  * 3. 死亡
  * 4. 攻击
  */
-public class Player : MonoBehaviour
+public class Player1 : MonoBehaviour
 {
     public float moveSpeed = 3;
 
@@ -102,10 +102,10 @@ public class Player : MonoBehaviour
         // 爆炸
         var go = Resources.Load<GameObject>(GameConst.ExplodePrefab);
         Instantiate(go, transform.position, transform.rotation);
-        GameContext.playerHp -= 1;
-        Debug.Log("hp is " + GameContext.playerHp);
+        GameContext.player1Hp -= 1;
+        Debug.Log("hp is " + GameContext.player1Hp);
 
-        if (GameContext.playerHp == 0)
+        if (GameContext.player1Hp == 0)
         {
             GameContext.isGameOver = true;
             Debug.Log("game over");
@@ -122,11 +122,11 @@ public class Player : MonoBehaviour
      */
     private void Relive()
     {
-        if (GameContext.playerHp > 0)
+        if (GameContext.player1Hp > 0)
         {
             // 重生
-            GameObject go = Resources.Load<GameObject>(GameConst.BornPrefab);
-            Instantiate(go, GameConst.PlayerBornVector3, Quaternion.identity);
+            GameObject go = Resources.Load<GameObject>(GameConst.BornPrefab1);
+            Instantiate(go, GameConst.Player1BornVector3, Quaternion.identity);
         }
     }
 
@@ -134,10 +134,10 @@ public class Player : MonoBehaviour
     private void Move()
     {
         // 垂直方向
-        h = Input.GetAxis("Horizontal");
+        h = Input.GetAxis("Player1Horizontal");
 
         // 水平方向
-        v = Input.GetAxis("Vertical");
+        v = Input.GetAxis("Player1Vertical");
 
         // 沿x移动
         transform.Translate(Vector3.right * h * moveSpeed * Time.fixedDeltaTime, Space.World);

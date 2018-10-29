@@ -11,6 +11,9 @@ using UnityEngine;
 
 public class GameContext
 {
+    /*是否是单人游戏*/
+    public static bool isSingle = true;
+
     /**
      * 游戏是否结束
      */
@@ -19,7 +22,9 @@ public class GameContext
     /**
      * 玩家血量
      */
-    public static int playerHp = 3;
+    public static int player1Hp = 3;
+
+    public static int player2Hp = 3;
 
     /**
      * 玩家分数
@@ -38,7 +43,9 @@ public class GameContext
     public static void reset()
     {
         isGameOver = false;
-        playerHp = 3;
+        player1Hp = 3;
+        player2Hp = 3;
+        isSingle = true;
         gameObjectMap.Clear();
         score = 0;
         currentEnemyCount = 0;

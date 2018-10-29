@@ -65,7 +65,7 @@ public class MainSceneManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene("Game");
-            GameConst.isSingle = isSingle;
+            GameContext.isSingle = isSingle;
         }
     }
 }
