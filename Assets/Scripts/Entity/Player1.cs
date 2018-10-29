@@ -105,10 +105,9 @@ public class Player1 : MonoBehaviour
         GameContext.player1Hp -= 1;
         Debug.Log("hp is " + GameContext.player1Hp);
 
-        if (GameContext.player1Hp == 0)
+        if (GameContext.player1Hp == 0 && GameContext.player2Hp == 0)
         {
             GameContext.isGameOver = true;
-            Debug.Log("game over");
             return;
         }
 

@@ -102,13 +102,12 @@ public class Player2 : MonoBehaviour
         // 爆炸
         var go = Resources.Load<GameObject>(GameConst.ExplodePrefab);
         Instantiate(go, transform.position, transform.rotation);
-        GameContext.player1Hp -= 1;
+        GameContext.player2Hp -= 1;
         Debug.Log("hp is " + GameContext.player2Hp);
 
-        if (GameContext.player2Hp == 0)
+        if (GameContext.player1Hp == 0 && GameContext.player2Hp == 0)
         {
             GameContext.isGameOver = true;
-            Debug.Log("game over");
             return;
         }
 
