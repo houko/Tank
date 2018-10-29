@@ -14,6 +14,10 @@ public class GameSceneManager : MonoBehaviour
     private void Awake()
     {
         enemyList = Resources.LoadAll(GameConst.EnemyPrefab, typeof(GameObject));
+        if (GameContext.isSingle)
+        {
+            GameContext.player2Hp = 0;
+        }
     }
 
     private void Start()
