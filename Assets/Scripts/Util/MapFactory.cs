@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class MapFactory : MonoBehaviour
 {
     public static void CreateMapItem(string goName, Vector3 vector3, Transform parent)
     {
         GameObject go = Resources.Load<GameObject>(goName);
-        GameObject ret = Instantiate(go, vector3, Quaternion.identity, parent);
-
+        Instantiate(go, vector3, Quaternion.identity, parent);
         GameContext.gameObjectMap.Add(string.Format("{0}-{1}", vector3.x, vector3.y), go);
     }
 
