@@ -9,9 +9,8 @@ public class Explode : MonoBehaviour
     /**
      * 动画播完之后销毁
      */
-    void Start()
+    private void Start()
     {
-        Destroy(gameObject, 0.167f);
+        Destroy(gameObject, 0.2f);
     }
-
 }

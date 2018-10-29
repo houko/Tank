@@ -8,8 +8,10 @@ public class MainSceneManager : MonoBehaviour
     /*默认单人*/
     private bool isSingle = true;
 
+    /* 单人*/
     private Transform pos1;
 
+    /* 双人 */
     private Transform pos2;
 
 
@@ -20,13 +22,16 @@ public class MainSceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 缓慢移到频幕中间
+    /// 缓慢移到屏幕中间
     /// </summary>
     private void Start()
     {
         transform.DOMoveY(300, 3f);
     }
 
+    /// <summary>
+    /// 控制选项和开始游戏
+    /// </summary>
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W) | Input.GetKeyDown(KeyCode.UpArrow))

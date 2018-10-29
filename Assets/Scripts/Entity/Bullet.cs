@@ -1,5 +1,4 @@
-﻿using DefaultNamespace;
-using UnityEngine;
+﻿using UnityEngine;
 
 /**
  * 子弹
@@ -11,6 +10,8 @@ public class Bullet : MonoBehaviour
     private const float moveSpeed = 10f;
 
     public bool isPlayerBullet;
+
+    private int BulletLevel { get; set; }
 
     private void Update()
     {
@@ -26,11 +27,19 @@ public class Bullet : MonoBehaviour
     {
         switch (other.tag)
         {
-            case GameObjectTag.Wall:
+            // 打到墙则打破墙
+            case GameConst.WallTag:
                 Destroy(gameObject);
                 Destroy(other.gameObject);
                 break;
-            case GameObjectTag.Barrier:
+            case GameConst.BarrierTag:
+                // 玩家子弹打到砖播放声音
+                if (BulletLevel > 1)
+                {
+                    // 子弹大于1级可以打破砖
+                    Destroy(other.gameObject);
+                }
+
                 if (isPlayerBullet)
                 {
                     other.SendMessage("PlayerAudio");
@@ -38,25 +47,26 @@ public class Bullet : MonoBehaviour
 
                 Destroy(gameObject);
                 break;
-            case GameObjectTag.Tank:
+            case GameConst.TankTag:
                 if (!isPlayerBullet)
                 {
-                    // 敌人打玩家
+                    // 敌人子弹打玩家
                     other.SendMessage("Die");
                     Destroy(gameObject);
                 }
 
                 break;
-            case GameObjectTag.Enemy:
+            case GameConst.EnemyTag:
                 if (isPlayerBullet)
                 {
-                    // 玩家打敌人
+                    // 玩家子弹打敌人
                     other.SendMessage("Die");
                     Destroy(gameObject);
                 }
 
                 break;
-            case GameObjectTag.Home:
+            case GameConst.HomeTag:
+                // 子弹打到老家游戏结束
                 Destroy(gameObject);
                 Destroy(other.gameObject);
                 var home = Resources.Load<GameObject>(GameConst.DieHomePrefab);

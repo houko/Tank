@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /**
 *  作   者 ：胡朋
@@ -16,6 +14,9 @@ public class Barrier : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    /// <summary>
+    /// 在和砖碰到的时候播放声音
+    /// </summary>
     public void PlayerAudio()
     {
         if (!audioSource.isPlaying)

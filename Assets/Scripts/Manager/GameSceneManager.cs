@@ -8,16 +8,12 @@ using UnityEngine.UI;
 */
 public class GameSceneManager : MonoBehaviour
 {
+    /*敌人prefab列表*/
     private Object[] enemyList;
-
-    private int maxEnemyCount;
-
-    private static int currentEnemyCount;
 
     private void Awake()
     {
         enemyList = Resources.LoadAll(GameConst.EnemyPrefab, typeof(GameObject));
-        maxEnemyCount = 5;
     }
 
     private void Start()
@@ -26,7 +22,7 @@ public class GameSceneManager : MonoBehaviour
         InitMap();
     }
 
- 
+
     /// <summary>
     /// 1. 创建老家
     /// 2. 创建随机地图
@@ -37,7 +33,7 @@ public class GameSceneManager : MonoBehaviour
     {
         CreateHome();
         CreatePlayer();
-        InvokeRepeating("CreateEnemy", 3f, 5f);
+        InvokeRepeating("CreateEnemy", 2f, 5f);
         CreateRandomMap();
     }
 
@@ -49,12 +45,12 @@ public class GameSceneManager : MonoBehaviour
 
     private void CreateEnemy()
     {
-        if (currentEnemyCount < maxEnemyCount)
+        if (GameContext.currentEnemyCount < GameConst.maxEnemyCount)
         {
             int index = Random.Range(0, enemyList.Length);
             Vector3 pos = GameConst.EnemyBornPosList[Random.Range(0, GameConst.EnemyBornPosList.Length)];
             Instantiate(enemyList[index], pos, Quaternion.identity);
-            currentEnemyCount++;
+            GameContext.currentEnemyCount++;
         }
     }
 
@@ -116,7 +112,7 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     private Vector3 CreateRandomPosition()
     {
-        Vector3 pos = new Vector3(Random.Range(-10, 10), Random.Range(-8, 9), 0);
+        Vector3 pos = new Vector3(Random.Range(-10, 10), Random.Range(-8, 8), 0);
         return MapFactory.IsEmpty(pos) ? pos : CreateRandomPosition();
     }
 }

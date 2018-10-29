@@ -4,6 +4,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
+    /*敌人的移动速度*/
     public float moveSpeed = 3;
 
     /*垂直方向*/
@@ -51,13 +52,15 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Die()
     {
-        Destroy(gameObject);
-
-        // 添加得分
-        GameContext.score += 1;
         // 爆炸效果
         GameObject go = Resources.Load<GameObject>(GameConst.ExplodePrefab);
         Instantiate(go, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+
+        // 积分+1
+        GameContext.score += 1;
+        // 敌人数量-1
+        GameContext.currentEnemyCount -= 1;
     }
 
     private void Move()
@@ -88,7 +91,6 @@ public class Enemy : MonoBehaviour
             }
 
             changeDirTimeVal = 0;
-            Debug.Log("敌人改变方向");
         }
         else
         {

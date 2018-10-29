@@ -23,13 +23,8 @@ public class Player : MonoBehaviour
     /*攻击冷却时间*/
     private float bulletCoolTime;
 
-    /*是否有护盾*/
-    private bool isProtected;
-
     /*护盾时间*/
     private float protectTimeVal = 3;
-
-    private GameObject player;
 
     private AudioSource tankAudio;
 
@@ -63,13 +58,12 @@ public class Player : MonoBehaviour
 
     private void CheckShield()
     {
-        if (isProtected)
+        if (protectTimeVal > 0)
         {
             protectTimeVal -= Time.deltaTime;
             if (protectTimeVal <= 0)
             {
-                isProtected = false;
-                player.transform.Find("Shield").gameObject.SetActive(false);
+                transform.Find("Shield").GetComponent<Renderer>().enabled = false;
             }
         }
     }
@@ -97,7 +91,8 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Die()
     {
-        if (isProtected)
+        // 无敌状态不会死亡
+        if (protectTimeVal > 0)
         {
             return;
         }
@@ -117,15 +112,24 @@ public class Player : MonoBehaviour
             return;
         }
 
-        // 重生
-        player = Resources.Load<GameObject>(GameConst.PlayerPrefab);
-        Instantiate(player, GameConst.PlayerBornVector3, transform.rotation);
-        isProtected = true;
-        protectTimeVal = 3f;
-
-        // 魔法盾标识
-        player.transform.Find("Shield").gameObject.SetActive(true);
+        Relive();
     }
+
+
+    /**
+     * 重生
+     * 只能在玩家的死亡方法调用
+     */
+    private void Relive()
+    {
+        if (GameContext.playerHp > 0)
+        {
+            // 重生
+            GameObject go = Resources.Load<GameObject>(GameConst.BornPrefab);
+            Instantiate(go, GameConst.PlayerBornVector3, Quaternion.identity);
+        }
+    }
+
 
     private void Move()
     {
