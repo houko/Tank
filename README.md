@@ -5,6 +5,9 @@
 - 网络上搜集的素材
 - 支持双人模式。
 
+## 下载体验地址
+[release](https://github.com/xiaomoinfo/Tank/releases)
+
 ## 1. 效果图
 ![开始场景](screenshot/Main.png)
 ![游戏场景](screenshot/Game.png)
