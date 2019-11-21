@@ -1,12 +1,12 @@
 # 坦克大战
-- 使用unity2018.2.13f1版本 + rider2018.2 开发
+- 使用unity2018.4 LTS版本 + rider开发
 - 使用了dotween插件
 - 2d的UGUI
 - 网络上搜集的素材
 - 支持双人模式。
 
 ## 下载体验地址
-[release](https://github.com/xiaomoinfo/Tank/releases)
+[release](https://github.com/houko/Tank/releases)
 
 ## 1. 效果图
 ![开始场景](screenshot/Main.png)
@@ -15,23 +15,23 @@
 ## 2. 操作说明
 
 选择：
-- w或↑ 向上
-- s或↓ 向下
-- 回车 开始游戏
+- `w` 或`↑` 向上
+- `s` 或`↓` 向下
+- `回车` 开始游戏
 
 player1:    
-- w 向上
-- s 向下
-- a 向左
-- d 向右
-- j 攻击
+- `w` 向上
+- `s` 向下
+- `a` 向左
+- `d` 向右
+- `j` 攻击
 
 player2:    
-- ↑ 向上
-- ↓ 向下
-- ← 向左
-- → 向右
-- 回车 攻击
+- `↑` 向上
+- `↓` 向下
+- `←` 向左
+- `→` 向右
+- `回车` 攻击
 
 
 ## 3. 视频效果
@@ -42,6 +42,10 @@ player2:
 - 不同敌人攻击力不同
 - 带特效的敌人打死奖励道具
 - 道具生效及搭配UI
+- 适配移动端（Android/IOS）
 
-## 5. license
+## 5.参与
+有兴趣参与的朋友可以直接fork本Repo进行学习和研究提PR，大家一起进步。
+
+## 6. license
 [license](LICENSE)
