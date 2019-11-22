@@ -47,5 +47,9 @@ player2:
 ## 5.参与
 有兴趣参与的朋友可以直接fork本Repo进行学习和研究提PR，大家一起进步。
 
-## 6. license
+## 6. github
+[tank](https://github.com/houko/Tank/)
+
+## 7. license
 [license](LICENSE)
+
