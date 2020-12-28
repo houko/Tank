@@ -133,10 +133,10 @@ public class Player2 : MonoBehaviour
     private void Move()
     {
         // 垂直方向
-        h = Input.GetAxis("Player2Horizontal");
+        h = Input.GetAxis("Horizontal");
 
         // 水平方向
-        v = Input.GetAxis("Player2Vertical");
+        v = Input.GetAxis("Vertical");
 
         // 沿x移动
         transform.Translate(Vector3.right * h * moveSpeed * Time.fixedDeltaTime, Space.World);
