@@ -1,187 +1,184 @@
 ﻿using System;
 using UnityEngine;
 
-/**
+namespace Entity
+{
+    /**
  * 1. 攻击
  * 2. 移动
  * 3. 死亡
  * 4. 攻击
  */
-public class Player1 : MonoBehaviour
-{
-    public float moveSpeed = 3;
-
-    /*垂直方向*/
-    public float h;
-
-    /*水平方向*/
-    public float v;
-
-    /*枪口方向*/
-    private Vector3 bulletEulerAngles;
-
-    /*攻击冷却时间*/
-    private float bulletCoolTime;
-
-    /*护盾时间*/
-    private float protectTimeVal = 3;
-
-    private AudioSource tankAudio;
-
-
-    private void Awake()
+    public class Player1 : MonoBehaviour
     {
-        tankAudio = GetComponent<AudioSource>();
-    }
+        public float moveSpeed = 3;
 
-    private void Update()
-    {
-        if (GameContext.isGameOver)
+        /*垂直方向*/
+        public float h;
+
+        /*水平方向*/
+        public float v;
+
+        /*枪口方向*/
+        private Vector3 bulletEulerAngles;
+
+        /*攻击冷却时间*/
+        private float bulletCoolTime;
+
+        /*护盾时间*/
+        private float protectTimeVal = 3;
+
+        private AudioSource tankAudio;
+
+
+        private void Awake()
         {
-            return;
+            tankAudio = GetComponent<AudioSource>();
         }
 
-        Attack();
-        CheckShield();
-    }
-
-    private void FixedUpdate()
-    {
-        if (GameContext.isGameOver)
+        private void Update()
         {
-            return;
+            if (GameContext.isGameOver)
+            {
+                return;
+            }
+
+            Attack();
+            CheckShield();
         }
 
-        Move();
-    }
-
-
-    private void CheckShield()
-    {
-        if (protectTimeVal > 0)
+        private void FixedUpdate()
         {
+            if (GameContext.isGameOver)
+            {
+                return;
+            }
+
+            Move();
+        }
+
+
+        private void CheckShield()
+        {
+            if (!(protectTimeVal > 0)) return;
             protectTimeVal -= Time.deltaTime;
             if (protectTimeVal <= 0)
             {
                 transform.Find("Shield").GetComponent<Renderer>().enabled = false;
             }
         }
-    }
 
 
-    private void Attack()
-    {
-        bulletCoolTime += Time.deltaTime;
-
-        if ((Input.GetKeyDown(KeyCode.Space) | Input.GetKeyDown(KeyCode.J)) && bulletCoolTime >= 0.5f)
+        private void Attack()
         {
-            GameObject go = Resources.Load<GameObject>(GameConst.PlayerBulletPrefab);
+            bulletCoolTime += Time.deltaTime;
+
+            if ((!(Input.GetKeyDown(KeyCode.Space) | Input.GetKeyDown(KeyCode.J))) || !(bulletCoolTime >= 0.5f)) return;
+            var go = Resources.Load<GameObject>(GameConst.PlayerBulletPrefab);
             Instantiate(go, transform.position, Quaternion.Euler(bulletEulerAngles));
             bulletCoolTime = 0f;
         }
-    }
 
 
-    /// <summary>
-    /// 死
-    /// 1. 销毁
-    /// 2. 爆炸效果，0
-    /// 3. 在出生地重新实例化
-    /// 4. 播放重生效果
-    /// </summary>
-    private void Die()
-    {
-        // 无敌状态不会死亡
-        if (protectTimeVal > 0)
+        /// <summary>
+        /// 死
+        /// 1. 销毁
+        /// 2. 爆炸效果，0
+        /// 3. 在出生地重新实例化
+        /// 4. 播放重生效果
+        /// </summary>
+        private void Die()
         {
-            return;
+            // 无敌状态不会死亡
+            if (protectTimeVal > 0)
+            {
+                return;
+            }
+
+            Destroy(gameObject);
+
+            // 爆炸
+            var go = Resources.Load<GameObject>(GameConst.ExplodePrefab);
+            Instantiate(go, transform.position, transform.rotation);
+            GameContext.player1Hp -= 1;
+            Debug.Log("hp is " + GameContext.player1Hp);
+
+            if (GameContext.player1Hp == 0 && GameContext.player2Hp == 0)
+            {
+                GameContext.isGameOver = true;
+                return;
+            }
+
+            Relive();
         }
 
-        Destroy(gameObject);
 
-        // 爆炸
-        var go = Resources.Load<GameObject>(GameConst.ExplodePrefab);
-        Instantiate(go, transform.position, transform.rotation);
-        GameContext.player1Hp -= 1;
-        Debug.Log("hp is " + GameContext.player1Hp);
-
-        if (GameContext.player1Hp == 0 && GameContext.player2Hp == 0)
-        {
-            GameContext.isGameOver = true;
-            return;
-        }
-
-        Relive();
-    }
-
-
-    /**
+        /**
      * 重生
      * 只能在玩家的死亡方法调用
      */
-    private void Relive()
-    {
-        if (GameContext.player1Hp > 0)
+        private static void Relive()
         {
+            if (GameContext.player1Hp <= 0) return;
             // 重生
-            GameObject go = Resources.Load<GameObject>(GameConst.BornPrefab1);
+            var go = Resources.Load<GameObject>(GameConst.BornPrefab1);
             Instantiate(go, GameConst.Player1BornVector3, Quaternion.identity);
         }
-    }
 
 
-    private void Move()
-    {
-        // 垂直方向
-        h = Input.GetAxis("Player1Horizontal");
-
-        // 水平方向
-        v = Input.GetAxis("Player1Vertical");
-
-        // 沿x移动
-        transform.Translate(Vector3.right * h * moveSpeed * Time.fixedDeltaTime, Space.World);
-
-        // 往右
-        if (h < 0)
+        private void Move()
         {
-            transform.eulerAngles = new Vector3(0, 0, 90);
-            bulletEulerAngles = new Vector3(0, 0, 90);
-        }
+            // 垂直方向
+            h = Input.GetAxis("Player1Horizontal");
 
-        // 往左
-        if (h > 0)
-        {
-            transform.eulerAngles = new Vector3(0, 0, -90);
-            bulletEulerAngles = new Vector3(0, 0, -90);
-        }
+            // 水平方向
+            v = Input.GetAxis("Player1Vertical");
 
-        if (Math.Abs(h) > 0)
-        {
-//            AudioClip audioClip = Resources.Load<AudioClip>(GameConst.DrivingAudio);
-//            tankAudio.Stop();
-//            tankAudio.clip = audioClip;
-//            if (!tankAudio.isPlaying)
-//            {
-//                AudioSource.PlayClipAtPoint(audioClip, transform.position);
-//            }
+            // 沿x移动
+            var fixedDeltaTime = Vector3.right * h * moveSpeed * Time.fixedDeltaTime;
+            transform.Translate(fixedDeltaTime, Space.World);
 
-            return;
-        }
+            // 往右
+            if (h < 0)
+            {
+                transform.eulerAngles = new Vector3(0, 0, 90);
+                bulletEulerAngles = new Vector3(0, 0, 90);
+            }
+
+            // 往左
+            if (h > 0)
+            {
+                transform.eulerAngles = new Vector3(0, 0, -90);
+                bulletEulerAngles = new Vector3(0, 0, -90);
+            }
+
+            if (Math.Abs(h) > 0)
+            {
+                var audioClip = Resources.Load<AudioClip>(GameConst.DrivingAudio);
+                tankAudio.Stop();
+                tankAudio.clip = audioClip;
+                if (!tankAudio.isPlaying)
+                {
+                    AudioSource.PlayClipAtPoint(audioClip, transform.position);
+                }
+
+                return;
+            }
 
 
-        // 沿y移动
-        transform.Translate(Vector3.up * v * moveSpeed * Time.fixedDeltaTime, Space.World);
+            // 沿y移动
+            var deltaTime = Vector3.up * (v * moveSpeed * Time.fixedDeltaTime);
+            transform.Translate(deltaTime, Space.World);
 
-        // 往下
-        if (v < 0)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 180);
-            bulletEulerAngles = new Vector3(0, 0, 180);
-        }
+            // 往下
+            if (v < 0)
+            {
+                transform.eulerAngles = new Vector3(0, 0, 180);
+                bulletEulerAngles = new Vector3(0, 0, 180);
+            }
 
-        // 往上
-        if (v > 0)
-        {
+            // 往上
+            if (!(v > 0)) return;
             transform.eulerAngles = new Vector3(0, 0, 0);
             bulletEulerAngles = new Vector3(0, 0, 0);
         }
