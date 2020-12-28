@@ -34,11 +34,9 @@ public class UIManager : MonoBehaviour
         textHp1.text = GameContext.player1Hp.ToString();
         textHp2.text = GameContext.player2Hp.ToString();
 
-        if (GameContext.isGameOver)
-        {
-            gameOver.SetActive(true);
-            Invoke("ReturnToMain", 5f);
-        }
+        if (!GameContext.isGameOver) return;
+        gameOver.SetActive(true);
+        Invoke(nameof(ReturnToMain), 5f);
     }
 
     /// <summary>

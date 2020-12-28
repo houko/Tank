@@ -4,13 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Wall
-  - Water
-  - Grass
+  - Tank
   - Barrier
   - Home
-  - Tank
   - Enemy
+  - Wall
+  - Grass
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -47,7 +47,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Effect
-    uniqueID: 379283411
     locked: 0
