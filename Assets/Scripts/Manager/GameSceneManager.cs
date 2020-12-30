@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 /**
 *  作   者 ：胡朋
-*  github : https://github.com/xiaomoinfo
+*  github : https://github.com/houko
 *  描   述 ：
 */
 public class GameSceneManager : MonoBehaviour

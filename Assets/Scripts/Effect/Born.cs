@@ -2,7 +2,7 @@
 
 /**
 *  作   者 ：胡朋
-*  github : https://github.com/xiaomoinfo
+*  github : https://github.com/houko
 *  描   述 ：出生特效脚本
 * 1. 生成出生动画
  * 

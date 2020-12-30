@@ -1,6 +1,6 @@
 /**
 * author: xiaomo
-* github: https://github.com/xiaomoinfo
+* github: https://github.com/houko
 * email: xiaomo@xiamoo.info
 * QQ_NO: 83387856
 * Desc: 游戏上下文,用于保存游戏状态
