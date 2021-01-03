@@ -1,4 +1,5 @@
 ﻿using System;
+using Constant;
 using UnityEngine;
 
 namespace Entity
@@ -38,7 +39,7 @@ namespace Entity
 
         private void Update()
         {
-            if (GameContext.isGameOver)
+            if (GameContext.IsGameOver)
             {
                 return;
             }
@@ -49,7 +50,7 @@ namespace Entity
 
         private void FixedUpdate()
         {
-            if (GameContext.isGameOver)
+            if (GameContext.IsGameOver)
             {
                 return;
             }
@@ -100,12 +101,12 @@ namespace Entity
             // 爆炸
             var go = Resources.Load<GameObject>(GameConst.ExplodePrefab);
             Instantiate(go, transform.position, transform.rotation);
-            GameContext.player1Hp -= 1;
-            Debug.Log("hp is " + GameContext.player1Hp);
+            GameContext.Player1Hp -= 1;
+            Debug.Log("hp is " + GameContext.Player1Hp);
 
-            if (GameContext.player1Hp == 0 && GameContext.player2Hp == 0)
+            if (GameContext.Player1Hp == 0 && GameContext.Player2Hp == 0)
             {
-                GameContext.isGameOver = true;
+                GameContext.IsGameOver = true;
                 return;
             }
 
@@ -119,7 +120,7 @@ namespace Entity
      */
         private static void Relive()
         {
-            if (GameContext.player1Hp <= 0) return;
+            if (GameContext.Player1Hp <= 0) return;
             // 重生
             var go = Resources.Load<GameObject>(GameConst.BornPrefab1);
             Instantiate(go, GameConst.Player1BornVector3, Quaternion.identity);

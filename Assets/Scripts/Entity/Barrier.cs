@@ -1,27 +1,30 @@
 ﻿using UnityEngine;
 
-/**
+namespace Entity
+{
+    /**
 *  作   者 ：胡朋
 *  github : https://github.com/houko
 *  描   述 ：
 */
-public class Barrier : MonoBehaviour
-{
-    private AudioSource audioSource;
-
-    private void Awake()
+    public class Barrier : MonoBehaviour
     {
-        audioSource = GetComponent<AudioSource>();
-    }
+        private AudioSource audioSource;
 
-    /// <summary>
-    /// 在和砖碰到的时候播放声音
-    /// </summary>
-    public void PlayerAudio()
-    {
-        if (!audioSource.isPlaying)
+        private void Awake()
         {
-            audioSource.Play();
+            audioSource = GetComponent<AudioSource>();
+        }
+
+        /// <summary>
+        /// 在和砖碰到的时候播放声音
+        /// </summary>
+        public void PlayerAudio()
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
         }
     }
 }
