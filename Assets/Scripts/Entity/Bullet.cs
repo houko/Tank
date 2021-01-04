@@ -10,15 +10,15 @@ namespace Entity
  */
     public class Bullet : MonoBehaviour
     {
-        private const float moveSpeed = 10f;
+        private const float MoveSpeed = 10f;
 
         public bool isPlayerBullet;
 
-        private int BulletLevel { get; set; }
+        private static int BulletLevel => 0;
 
         private void Update()
         {
-            transform.Translate(transform.up * moveSpeed * Time.deltaTime, Space.World);
+            transform.Translate(transform.up * (MoveSpeed * Time.deltaTime), Space.World);
         }
 
 
@@ -73,10 +73,11 @@ namespace Entity
                     Destroy(gameObject);
                     Destroy(other.gameObject);
                     var home = Resources.Load<GameObject>(GameConst.DieHomePrefab);
-                    Instantiate(home, other.transform.position, Quaternion.identity);
+                    var position = other.transform.position;
+                    Instantiate(home, position, Quaternion.identity);
 
                     var explode = Resources.Load<GameObject>(GameConst.ExplodePrefab);
-                    Instantiate(explode, other.transform.position, Quaternion.identity);
+                    Instantiate(explode, position, Quaternion.identity);
                     GameContext.IsGameOver = true;
                     break;
             }

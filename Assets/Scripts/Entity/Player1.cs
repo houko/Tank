@@ -136,7 +136,7 @@ namespace Entity
             v = Input.GetAxis("Player1Vertical");
 
             // 沿x移动
-            var fixedDeltaTime = Vector3.right * h * moveSpeed * Time.fixedDeltaTime;
+            var fixedDeltaTime = Vector3.right * (h * moveSpeed * Time.fixedDeltaTime);
             transform.Translate(fixedDeltaTime, Space.World);
 
             // 往右

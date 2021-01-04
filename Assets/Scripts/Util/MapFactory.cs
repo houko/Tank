@@ -13,9 +13,9 @@ namespace Util
         /// <param name="parent"></param>
         public static void CreateMapItem(string goName, Vector3 vector3, Transform parent)
         {
-            GameObject go = Resources.Load<GameObject>(goName);
+            var go = Resources.Load<GameObject>(goName);
             Instantiate(go, vector3, Quaternion.identity, parent);
-            GameContext.GameObjectMap.Add(string.Format("{0}-{1}", vector3.x, vector3.y), go);
+            GameContext.GameObjectMap.Add($"{vector3.x}-{vector3.y}", go);
         }
 
 
@@ -26,8 +26,7 @@ namespace Util
         /// <returns></returns>
         public static bool IsEmpty(Vector3 vector3)
         {
-            GameObject go;
-            GameContext.GameObjectMap.TryGetValue(string.Format("{0}-{1}", vector3.x, vector3.y), out go);
+            GameContext.GameObjectMap.TryGetValue($"{vector3.x}-{vector3.y}", out var go);
             return go == null;
         }
     }

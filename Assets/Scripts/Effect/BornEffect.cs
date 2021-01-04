@@ -10,7 +10,7 @@ namespace Effect
 * 1. 生成出生动画
  * 
 */
-    public class Born : MonoBehaviour
+    public class BornEffect : MonoBehaviour
     {
         public bool isPlayer1 = true;
 

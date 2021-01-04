@@ -10,7 +10,7 @@ namespace Constant
     public static class GameConst
     {
         /*场上最大敌人数量*/
-        public static readonly int maxEnemyCount = 5;
+        public const int MAXEnemyCount = 5;
 
         /* 老家坐标*/
         public static Vector3 HomeVector3 = new Vector3(0, -8, 0);

@@ -142,7 +142,7 @@ namespace Entity
             v = Input.GetAxis("Vertical");
 
             // 沿x移动
-            transform.Translate(Vector3.right * h * moveSpeed * Time.fixedDeltaTime, Space.World);
+            transform.Translate(Vector3.right * (h * moveSpeed * Time.fixedDeltaTime), Space.World);
 
             // 往右
             if (h < 0)
@@ -173,7 +173,7 @@ namespace Entity
 
 
             // 沿y移动
-            transform.Translate(Vector3.up * v * moveSpeed * Time.fixedDeltaTime, Space.World);
+            transform.Translate(Vector3.up * (v * moveSpeed * Time.fixedDeltaTime), Space.World);
 
             // 往下
             if (v < 0)

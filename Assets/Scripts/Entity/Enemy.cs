@@ -26,7 +26,7 @@ namespace Entity
         private float changeDirTimeVal = 4f;
 
         /*每隔多久改变方向*/
-        private const float changeDirTime = 4f;
+        private const float ChangeDirTime = 4f;
 
         private void FixedUpdate()
         {
@@ -69,7 +69,7 @@ namespace Entity
         private void Move()
         {
             // 转向
-            if (changeDirTimeVal >= changeDirTime)
+            if (changeDirTimeVal >= ChangeDirTime)
             {
                 int num = Random.Range(0, 8);
                 if (num > 5)

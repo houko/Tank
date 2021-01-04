@@ -62,7 +62,7 @@ namespace Manager
 
         private void CreateEnemy()
         {
-            if (GameContext.CurrentEnemyCount < GameConst.maxEnemyCount)
+            if (GameContext.CurrentEnemyCount < GameConst.MAXEnemyCount)
             {
                 int index = Random.Range(0, enemyList.Length);
                 Vector3 pos = GameConst.EnemyBornPosList[Random.Range(0, GameConst.EnemyBornPosList.Length)];

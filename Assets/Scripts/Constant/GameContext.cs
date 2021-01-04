@@ -17,7 +17,6 @@ namespace Constant
      * 玩家血量
      */
   public static int Player1Hp = 3;
-
   public static int Player2Hp = 3;
 
   /**
