@@ -1,11 +1,12 @@
 using System;
 using Constant;
+using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Entity
 {
-    public class Enemy : MonoBehaviour
+    public class EnemyAI : MonoBehaviour
     {
         /*敌人的移动速度*/
         public float moveSpeed = 3;
@@ -39,12 +40,10 @@ namespace Entity
         {
             bulletCoolTime += Time.deltaTime;
 
-            if (bulletCoolTime >= 3f)
-            {
-                GameObject go = Resources.Load<GameObject>(GameConst.EnemyBulletPrefab);
-                Instantiate(go, transform.position, Quaternion.Euler(bulletEulerAngles));
-                bulletCoolTime = 0f;
-            }
+            if (!(bulletCoolTime >= 3f)) return;
+            GameObject go = Resources.Load<GameObject>(GameConst.EnemyBulletPrefab);
+            Instantiate(go, transform.position, Quaternion.Euler(bulletEulerAngles));
+            bulletCoolTime = 0f;
         }
 
 
@@ -87,7 +86,7 @@ namespace Entity
                     h = -1;
                     v = 0;
                 }
-                else if (num > 3 && num <= 5)
+                else if (num > 3)
                 {
                     h = 1;
                     v = 0;
@@ -102,7 +101,7 @@ namespace Entity
 
 
             // 沿x移动
-            transform.Translate(Vector3.right * h * moveSpeed * Time.fixedDeltaTime, Space.World);
+            transform.Translate(Vector3.right * (h * moveSpeed * Time.fixedDeltaTime), Space.World);
 
             // 往右
             if (h < 0)
@@ -124,7 +123,7 @@ namespace Entity
             }
 
             // 沿y移动
-            transform.Translate(Vector3.up * v * moveSpeed * Time.fixedDeltaTime, Space.World);
+            transform.Translate(Vector3.up * (v * moveSpeed * Time.fixedDeltaTime), Space.World);
 
             // 往下
             if (v < 0)
@@ -134,11 +133,9 @@ namespace Entity
             }
 
             // 往上
-            if (v > 0)
-            {
-                transform.eulerAngles = new Vector3(0, 0, 0);
-                bulletEulerAngles = new Vector3(0, 0, 0);
-            }
+            if (!(v > 0)) return;
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            bulletEulerAngles = new Vector3(0, 0, 0);
         }
     }
 }
